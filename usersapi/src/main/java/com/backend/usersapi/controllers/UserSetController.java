@@ -36,13 +36,10 @@ public class UserSetController {
         if (!(attributes instanceof Claims) || (attributes == null)) {
             throw new RuntimeException("Invalid JSON Web Token");
         }
-
         Claims claims = (Claims) attributes;
-
         if (userIdentifier.equalsIgnoreCase((String) claims.get("userIdentifier"))) {
             throw new AccessDeniedException("Access denied");
         }
-
         return userSetRepository.findByUserIdentifier(userIdentifier);
     }
 
