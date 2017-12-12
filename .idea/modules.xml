@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/authapi/authapi.iml" filepath="$PROJECT_DIR$/authapi/authapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loginapi/loginapi.iml" filepath="$PROJECT_DIR$/loginapi/loginapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/usersapi/usersapi.iml" filepath="$PROJECT_DIR$/usersapi/usersapi.iml" />
     </modules>
   </component>
