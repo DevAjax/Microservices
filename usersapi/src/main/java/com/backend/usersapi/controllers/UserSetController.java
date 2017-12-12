@@ -8,14 +8,12 @@ import io.jsonwebtoken.Claims;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -36,18 +34,11 @@ public class UserSetController {
         return new Gson().toJson(res);
     }
 
-    @RequestMapping(value = "/{userIdentifier}", method = RequestMethod.GET)
-    public UserSet getUserSet(HttpServletRequest req, @PathVariable("userIdentifier") String userIdentifier) {
-        Object attributes = req.getAttribute("claims");
-        //  log.info(attributes.toString());
-        if (!(attributes instanceof Claims) || (attributes == null)) {
-            throw new RuntimeException("Invalid JSON Web Token");
-        }
-        Claims claims = (Claims) attributes;
-        if (userIdentifier.equalsIgnoreCase((String) claims.get("userIdentifier"))) {
-            throw new AccessDeniedException("Access denied");
-        }
-        return userSetRepository.findByUserIdentifier(userIdentifier);
+    @RequestMapping(value = "/userdata", method = RequestMethod.GET)
+    public Map<String,String> getUserData(@RequestParam("userIdentifier") String userIdentifier){
+        log.info("Invoked getUserData method with userIdentifier: "+ userIdentifier);
+        return userSetRepository.findByUserIdentifier(userIdentifier).getSet();
     }
+
 
 }
